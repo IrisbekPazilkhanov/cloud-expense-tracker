@@ -9,11 +9,10 @@ app.use(cors());
 app.use(express.json());
 
 const pool = new Pool({
-  user: "admin",
-  host: process.env.DB_HOST || "localhost",
-  database: "expenses_db",
-  password: "password",
-  port: 5432
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 async function initializeDatabase() {
