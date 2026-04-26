@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+const API_URL = "https://cloud-expense-tracker-production.up.railway.app";
+
 function App() {
   const [expenses, setExpenses] = useState([]);
   const [title, setTitle] = useState("");
@@ -8,7 +10,7 @@ function App() {
   const [date, setDate] = useState("2026-04-26");
 
   function loadExpenses() {
-    fetch("http://localhost:3000/expenses")
+    fetch(`${API_URL}/expenses`)
       .then((res) => res.json())
       .then((data) => setExpenses(data));
   }
@@ -20,7 +22,7 @@ function App() {
   function addExpense(e) {
     e.preventDefault();
 
-    fetch("http://localhost:3000/expenses", {
+    fetch(`${API_URL}/expenses`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -40,7 +42,7 @@ function App() {
   }
 
   function deleteExpense(id) {
-    fetch(`http://localhost:3000/expenses/${id}`, {
+    fetch(`${API_URL}/expenses/${id}`, {
       method: "DELETE"
     }).then(() => loadExpenses());
   }
